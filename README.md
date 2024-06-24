@@ -154,19 +154,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 This SDK is not affiliated with or endorsed by TikTok. It is a simple wrapper to facilitate interaction with the TikTok API.
 ```
-
-### Steps to Follow for Publishing the Package
-
-1. **Log in to npm**:
-
-    ```sh
-    npm login
-    ```
-
-2. **Publish the package**:
-
-    ```sh
-    npm publish
-    ```
-
-By following these steps, you can create a well-documented and easy-to-use TikTok SDK that can be installed and used by others.
