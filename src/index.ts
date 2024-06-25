@@ -27,8 +27,8 @@ class TikTokClient {
     private async fetchAuthCode(): Promise<string> {
         const body = {
             grant_type: 'client_credential',
-            client_id: 'YOUR_CLIENT_ID_HERE',  // Replace with your actual client ID
-            client_secret: 'YOUR_CLIENT_SECRET_HERE'
+            client_id: process.env.TIKTOK_CLIENT_ID,
+            client_secret: process.env.TIKTOK_CLIENT_SECRET
         };
 
         const options: RequestInit = {

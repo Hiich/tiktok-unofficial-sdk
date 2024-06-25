@@ -1,4 +1,4 @@
-import TikTokClient from '../../client';
+import TikTokClient from '../..';
 import { tiktokEndpoints } from '../../config';
 import { Query, QueryVideoResponseData } from './types';
 

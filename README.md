@@ -17,7 +17,7 @@ A simple SDK for interacting with the TikTok API. This SDK provides methods to f
 You can install the SDK via npm:
 
 ```sh
-npm install tiktok-sdk
+npm install tiktok-unofficial-sdk
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ npm install tiktok-sdk
 ### Import the SDK
 
 ```typescript
-import TikTokClient from 'tiktok-sdk';
+import TikTokClient from 'tiktok-unofficial-sdk';
 ```
 
 ### Initialize the Client
@@ -206,7 +206,7 @@ const fields = 'id,like_count,create_time,text,video_id,parent_comment_id';
 
 const comments = await client.videos.queryComments(video_id, fields, 50, 150);
 console.log(comments);
-
+```
 
 ## Contributing
 
