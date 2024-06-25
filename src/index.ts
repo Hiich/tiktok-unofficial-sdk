@@ -9,6 +9,10 @@ class TikTokClient {
     public video: TikTokVideo;
 
     constructor() {
+        if (!process.env.TIKTOK_CLIENT_ID || !process.env.TIKTOK_CLIENT_SECRET) {
+            throw new Error('Environment variables TIKTOK_CLIENT_ID and TIKTOK_CLIENT_SECRET must be set');
+        }
+
         this.baseUrl = tiktokEndpoints.hostname;
         this.accessToken = '';
         this.user = new TikTokUser(this);
