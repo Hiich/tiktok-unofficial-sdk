@@ -1,6 +1,7 @@
-import TikTokClient from "../client";
-import { tiktokEndpoints } from "../config";
-import { UserFollowersFields, UserInfoFields, UserVideoFields } from "../types";
+import TikTokClient from "../../client";
+import { tiktokEndpoints } from "../../config";
+import { UserVideoFields } from "../video/types";
+import { UserFollowersFields, UserInfoFields } from "./types";
 
 export class TikTokUser {
     private client: TikTokClient;

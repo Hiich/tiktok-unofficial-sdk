@@ -1,15 +1,18 @@
 import { tiktokEndpoints } from "./config";
 import { TikTokUser } from "./modules/user";
+import { TikTokVideo } from "./modules/video";
 
 class TikTokClient {
     private baseUrl: string;
     private accessToken: string;
     public user: TikTokUser;
+    public video: TikTokVideo;
 
     constructor() {
         this.baseUrl = tiktokEndpoints.hostname;
         this.accessToken = '';
         this.user = new TikTokUser(this);
+        this.video = new TikTokVideo(this);
         this.initialize();
     }
 

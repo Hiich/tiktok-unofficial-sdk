@@ -2,6 +2,7 @@ export const tiktokEndpoints = {
     hostname: "https://open.tiktokapis.com/v2",
     videos: {
         comments: "/research/video/comment/list/",
+        query: "/research/video/query/",
     },
     user: {
         likes: "/research/user/liked_videos/",

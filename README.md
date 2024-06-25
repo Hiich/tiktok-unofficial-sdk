@@ -1,10 +1,6 @@
-
-Here's an extensive `README.md` file for your TikTok SDK:
-
-```markdown
 # TikTok SDK
 
-A simple SDK for interacting with the TikTok API. This SDK provides methods to fetch user information, liked videos, pinned videos, reposted videos, followers, and following lists.
+A simple SDK for interacting with the TikTok API. This SDK provides methods to fetch user information, liked videos, pinned videos, reposted videos, followers, following lists, and querying videos.
 
 ## Features
 
@@ -14,6 +10,7 @@ A simple SDK for interacting with the TikTok API. This SDK provides methods to f
 - Fetch user's reposted videos
 - Fetch user's followers
 - Fetch user's following
+- Query videos
 
 ## Installation
 
@@ -100,6 +97,42 @@ const following = await client.user.get('following', username, userFollowersFiel
 console.log('Following:', following);
 ```
 
+### Query Videos
+
+To query videos using the TikTok Research API, use the `query` method from the `Videos` module.
+
+#### Parameters:
+
+- `query`: Query object containing the conditions.
+- `fields`: A comma-separated string of fields to retrieve.
+- `start_date`: The lower bound of video creation time in UTC (YYYYMMDD).
+- `end_date`: The upper bound of video creation time in UTC (YYYYMMDD).
+- `max_count` (optional): The number of videos in response (default: 20, max: 100).
+- `cursor` (optional): Retrieve video results starting from the specified index.
+- `search_id` (optional): The unique identifier assigned to a cached search result.
+- `is_random` (optional): Whether to return results in a random order.
+
+#### Example:
+
+```typescript
+const query = {
+  and: [
+    { field_name: 'region_code', operation: 'IN', field_values: ['JP', 'US'] },
+    { field_name: 'hashtag_name', operation: 'EQ', field_values: ['animal'] }
+  ],
+  not: [
+    { field_name: 'video_length', operation: 'EQ', field_values: ['SHORT'] }
+  ]
+};
+
+const fields = 'id,video_description,create_time';
+const start_date = '20230101';
+const end_date = '20230115';
+
+const response = await client.videos.query(query, fields, start_date, end_date);
+console.log(response);
+```
+
 ## API Reference
 
 ### TikTokClient
@@ -142,6 +175,39 @@ Fetch user's liked, pinned, reposted videos, followers, or following.
 get(type: 'likes' | 'pinned' | 'reposted' | 'followers' | 'following', username: string, fields: UserVideoFields[] | UserFollowersFields[], maxCount?: number, cursor?: number | null): Promise<any>
 ```
 
+### Videos
+
+A class for video-related methods.
+
+#### query
+
+Query videos using the TikTok Research API.
+
+```typescript
+query(query: Query, fields: string, start_date: string, end_date: string, max_count?: number, cursor?: number, search_id?: string, is_random?: boolean): Promise<QueryVideoResponseData>
+```
+
+### Query Video Comments
+
+To query video comments using the TikTok Research API, use the `queryComments` method from the `Videos` module.
+
+#### Parameters:
+
+- `video_id`: The ID of the video to query comments for.
+- `fields`: A comma-separated string of fields to retrieve.
+- `max_count` (optional): The number of comments in response (default: 10, max: 100).
+- `cursor` (optional): The starting index of the comments in the response.
+
+#### Example:
+
+```typescript
+const video_id = 1234567890123456789;
+const fields = 'id,like_count,create_time,text,video_id,parent_comment_id';
+
+const comments = await client.videos.queryComments(video_id, fields, 50, 150);
+console.log(comments);
+
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
@@ -153,4 +219,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgements
 
 This SDK is not affiliated with or endorsed by TikTok. It is a simple wrapper to facilitate interaction with the TikTok API.
-```
